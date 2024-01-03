@@ -1,0 +1,22 @@
+{
+  "name": "hucklebotjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CamEwing/HucklebotJS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CamEwing/HucklebotJS/issues"
+  },
+  "homepage": "https://github.com/CamEwing/HucklebotJS#readme",
+  "dependencies": {
+    "discord.js": "^14.14.1"
+  }
+}
