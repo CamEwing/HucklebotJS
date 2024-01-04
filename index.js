@@ -34,7 +34,8 @@ client.on('messageCreate', message => {
 	//This checks to see if a message starts with the prefix or is from a bot
 	if (!message.content.startsWith(cmdPrefix) || message.author.bot) {
 		if (message.content.toLowerCase().includes("hucklebot")){
-			message.channel.send("fack you!", { tts: true, files: [{ attachment: "./Resources/guesswhat.jpg" }] }); //TTS and file attachment no go
+			message.channel.send({ files: [{ attachment: "./Resources/guesswhat.JPG" }] });
+			//message.channel.send("fack you!", { tts: true, files: [{ attachment: "./Resources/guesswhat.jpg" }] }); //TTS and file attachment no go
 			//message.channel.send("fack you!", {tts: true});		//TTS not working
 		} return;
 	}
