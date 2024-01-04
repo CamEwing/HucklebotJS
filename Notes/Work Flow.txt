@@ -1,0 +1,6 @@
+Completing Tickets
+1	Take a ticket
+2	Create a branch (git checkout -b <ticket name>
+3	Complete ticket
+4	Merge ticket back into main branch
+5	repeat

@@ -1,0 +1,11 @@
+
+
+Figure out why commands (*ping) don't working
+
+Figure out why Hucklebot doesn't send audio in calls
+    Try reverting to a former github commit
+
+Hucklebot leaves if no one is in call
+
+Youtube audio player
+Battleship game 1v1 and 1vBOT

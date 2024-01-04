@@ -1,0 +1,98 @@
+Twitch Username and Password
+Username: HucklebotClient
+Password: DevTeamBloob1
+
+Lot of code from https://github.com/smallwoj/join-sound-johnson-py
+
+Turn my voice into AI (Like gaming presidents video) and add it to /tts on discord 
+
+#NEED TO PLAY AUDIO CLIP IN CHANNEL
+@client.command(name="playOnJoin") 
+async def playJoin(ctx):
+    # Gets voice channel of message author
+    voice_channel = ctx.author.channel
+    channel = None
+    if voice_channel != None:
+        channel = voice_channel.name
+        vc = await voice_channel.connect()
+        vc.play(discord.FFmpegPCMAudio(executable="C:/ffmpeg/bin/ffmpeg.exe", source="C:<path_to_file>"))
+        # Sleep while audio is playing.
+        while vc.is_playing():
+            sleep(.1)
+        await vc.disconnect()
+    else:
+        await ctx.send(str(ctx.author.name) + "is not in a channel.")
+
+
+@bot.command()
+async def join(ctx):
+    channel = ctx.author.voice.channel
+    await channel.connect()
+
+@bot.command()
+async def leave(ctx):
+    await ctx.voice_client.disconnect()
+
+
+
+
+from time import sleep
+import discord
+from discord.ext import commands
+
+intents=discord.Intents.all()
+client = discord.Client(intents=intents)
+bot = commands.Bot(command_prefix='*', intents=intents)
+
+@client.event
+async def on_ready():
+    print('Beep Boop logging in {0.user}'.format(client))
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+    #if message.content.endswith('hucklebot'):       #Send when someone sends a message thats over certain char limit
+    if "hucklebot" in message.content.lower():
+        await message.channel.send(file=discord.File('guesswhat.jpg'))
+        print(message.channel)
+
+#If someone joins call play tone
+@client.event
+async def on_voice_state_update(member, before, after):
+    if before.channel is None and after.channel is not None:
+        print('user joined call', after)
+
+        channel = client.get_channel(1031672534711681204) #hucklelog channel id
+        #print(channel)
+        await channel.send('*joinCall')
+        #await joinCall()
+        
+        #await client.join_voice_channel(channel)
+
+        #vc = await after.channel.name.connect()
+        #vc = await client.move_to(after.channel)
+        #vc.play(discord.FFmpegPCMAudio(executable="D:/Hucklebot/ffmpeg/bin/ffmpeg.exe", source="D:/Hucklebot/DanAudio.mp3"))
+
+        #Sleep while audio is playing.
+        #while vc.is_playing():
+        #    sleep(3)
+        #await vc.disconnect()
+
+
+    if before.channel is not None and after.channel is None:
+        print('user left call')
+
+
+@bot.command()
+async def joinCall(ctx):
+    print('joining')
+    channel = ctx.author.voice.channel
+    await channel.connect()
+
+    #vc = await channel.name.connect()
+    #vc.play(discord.FFmpegPCMAudio(executable="D:/Hucklebot/ffmpeg/bin/ffmpeg.exe", source="D:/Hucklebot/DanAudio.mp3"))
+
+@bot.command()
+async def leave(ctx):
+    await ctx.voice_client.disconnect()
