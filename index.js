@@ -2,6 +2,9 @@
 
 // Require the necessary discord.js classes
 const Discord = require('discord.js');
+
+// const joinVoiceChannel = require('@discordjs/voice');
+
 //idk what this is... might delete later
 //const gatewayIntentBits = Discord.GatewayIntentBits;GUILDS
 //creating client
@@ -34,13 +37,12 @@ client.on('messageCreate', message => {
 	//This checks to see if a message starts with the prefix or is from a bot
 	if (!message.content.startsWith(cmdPrefix) || message.author.bot) {
 		if (message.content.toLowerCase().includes("hucklebot")){
+			message.channel.send("fack you!", { tts: true });
 			message.channel.send({ files: [{ attachment: "./Resources/guesswhat.JPG" }] });
-			//message.channel.send("fack you!", { tts: true, files: [{ attachment: "./Resources/guesswhat.jpg" }] }); //TTS and file attachment no go
-			//message.channel.send("fack you!", {tts: true});		//TTS not working
 		} return;
 	}
 
-	if (message.content.startsWith(cmdPrefix)) {
+	else if (message.content.startsWith(cmdPrefix)) {
 		//remove first part of command
 		//This should eventually turn command into an array to accept multiple arguments
 		let command = message.content.slice(cmdPrefix.length).split(" ");
@@ -54,6 +56,54 @@ client.on('messageCreate', message => {
 		}
 	} return;
 });
+
+// client.on('voiceStateUpdate', (oldState, newState) => {
+// 	if (newState.channelID === null) {
+// 		console.log('user left channel', oldState.channelID);
+// 	}
+// 	else if (oldState.channelID === null) {
+// 		console.log('user joined channel', newState.channelID, newState.guild.ownerId);
+// 		try {
+//             const connection = joinVoiceChannel({
+//                 channelId: newState.channelId,
+//                 guildId: newState.guild.id,
+//                 adapterCreator: newState.guild.voiceAdapterCreator,
+//             });
+
+// 			console.log('bot joined voice channel',getVoiceConnections());
+//         }
+//         catch (error) {
+//             console.log('bot could not join voice channel', error);
+//         }
+// 	}
+// 	else {
+// 		console.log('user moved channels', oldState.channelId, newState.channelId);
+// 	}
+// });
+
+// client.on('voiceStateUpdate', (oldState, newState) => {
+// 	if ((oldState.channelId !== null) && (newState.channelID === null)) {
+// 		console.log('user left channel', oldState.channelID);
+// 	}
+// 	else if ((oldState.channelId === null) && (newState.channelID !== null)) {
+// 		console.log('user joined channel', newState.channelID, newState.guild.ownerId);
+// 		try {
+//             const connection = joinVoiceChannel({
+//                 channelId: newState.channelId,
+//                 guildId: newState.guild.id,
+//                 adapterCreator: newState.guild.voiceAdapterCreator,
+//             });
+
+// 			console.log('bot joined voice channel', getVoiceConnections());
+//         }
+//         catch (error) {
+//             console.log('bot could not join voice channel', error);
+//         }
+// 	}
+// 	else {
+// 		console.log('user moved channels', oldState.channelId, newState.channelId);
+// 	}
+// });
 
 
 // Log in to Discord with your client's token
