@@ -3,7 +3,7 @@
 // Require the necessary discord.js classes
 const Discord = require('discord.js');
 
-// const joinVoiceChannel = require('@discordjs/voice');
+const { joinVoiceChannel, getVoiceConnection } = require('@discordjs/voice');
 
 //idk what this is... might delete later
 //const gatewayIntentBits = Discord.GatewayIntentBits;GUILDS
@@ -81,29 +81,30 @@ client.on('messageCreate', message => {
 // 	}
 // });
 
-// client.on('voiceStateUpdate', (oldState, newState) => {
-// 	if ((oldState.channelId !== null) && (newState.channelID === null)) {
-// 		console.log('user left channel', oldState.channelID);
-// 	}
-// 	else if ((oldState.channelId === null) && (newState.channelID !== null)) {
-// 		console.log('user joined channel', newState.channelID, newState.guild.ownerId);
-// 		try {
-//             const connection = joinVoiceChannel({
-//                 channelId: newState.channelId,
-//                 guildId: newState.guild.id,
-//                 adapterCreator: newState.guild.voiceAdapterCreator,
-//             });
+client.on('voiceStateUpdate', (oldState, newState) => {
+	if ((oldState.channelId !== null) && (newState.channelId === null)) {
+		console.log('user left channel', oldState.channelId);
+	}
+	else if ((oldState.channelId === null) && (newState.channelId !== null)) {
+		console.log('user joined channel', newState.channelId, newState.guild.ownerId);
+		//add check to see if bot is already in channel
+		try {
+            const connection = joinVoiceChannel({
+                channelId: newState.channelId,
+                guildId: newState.guild.id,
+                adapterCreator: newState.guild.voiceAdapterCreator,
+            });
 
-// 			console.log('bot joined voice channel', getVoiceConnections());
-//         }
-//         catch (error) {
-//             console.log('bot could not join voice channel', error);
-//         }
-// 	}
-// 	else {
-// 		console.log('user moved channels', oldState.channelId, newState.channelId);
-// 	}
-// });
+			console.log('bot joined voice channel', newState.guild.id);
+        }
+        catch (error) {
+            console.log('bot could not join voice channel', error);
+        }
+	}
+	else if (oldState.channelId !== newState.channelId) {
+		console.log('user moved channels', oldState.channelId, newState.channelId);
+	}
+});
 
 
 // Log in to Discord with your client's token
